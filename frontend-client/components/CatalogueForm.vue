@@ -5,13 +5,13 @@
   >
     ADD +
   </button>
-  <dialog id="my_modal_1" class="modal">
-    <div class="modal-box">
-      <h3 class="font-bold text-lg">Hello!</h3>
+  <dialog id="my_modal_1" class="modal bg-gray-800 border rounded-md">
+    <div class="w-full max-w-5xl p-10">
+      <h3 class="">Hello!</h3>
       <p class="py-4">Press ESC key or click the button below to close</p>
-      <div class="modal-action">
+      <div class="text-right">
         <form method="dialog">
-          <button class="btn">Close</button>
+          <button class="btn">Save</button>
         </form>
       </div>
     </div>
