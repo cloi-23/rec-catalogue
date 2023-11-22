@@ -12,11 +12,7 @@
             placeholder="Search Item"
             class="p-4 border-2 border-gray-300 form-input mt-1 block w-1/2 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
-          <button
-            class="btn btn-sm btn-outline border-2 px-2 my-2 hover:bg-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-300 focus:ring-opacity-50"
-          >
-            ADD +
-          </button>
+          <CatalogueForm />
         </div>
         <div class="py-7 grid grid-cols-3 gap-4">
           <div class="grid-header">Date</div>
