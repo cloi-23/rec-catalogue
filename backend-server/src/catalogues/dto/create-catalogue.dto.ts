@@ -1,7 +1,10 @@
-import { IsString, IsNumber } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsString, IsNumber, ValidateNested, IsArray } from 'class-validator';
 export class CreateCatalogueDto {
-  @IsString()
-  item: string;
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => Item)
+  items: Item[];
 
   @IsString()
   supplier: string;
@@ -11,4 +14,12 @@ export class CreateCatalogueDto {
 
   @IsNumber()
   amount: number;
+}
+
+class Item {
+  @IsString()
+  name: string;
+
+  @IsNumber()
+  cost: number;
 }
