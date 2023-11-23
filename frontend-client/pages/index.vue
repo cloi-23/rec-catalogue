@@ -21,7 +21,7 @@ watch(controls, useDebounce(refresh, 700) as any, { immediate: true });
             v-model="controls.search"
             type="text"
             placeholder="Search Item"
-            class="p-4 border-2 border-gray-300 mt-1 w-1/2 rounded-md shadow-sm"
+            class="h-12 p-4 border-2 border-gray-300 mt-1 w-1/2 rounded-md shadow-sm"
           />
           <CatalogueForm @refresh="refresh" />
         </div>
