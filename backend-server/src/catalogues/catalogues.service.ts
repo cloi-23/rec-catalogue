@@ -64,43 +64,33 @@ export class CataloguesService {
     }
   }
 
-  async search(item: any, page: number = 1, limit: number = 10): Promise<any> {
-    const skip = (page - 1) * limit;
-    const searchTerm = item !== 'null' ? item : false;
-    const regex = new RegExp(`^${searchTerm}|${searchTerm}`, 'i');
-    const query = searchTerm ? { 'items.name': { $regex: regex } } : {};
-    console.log('searchTerm', searchTerm, item !== 'null');
-    console.log('query', query);
+  async search(
+    item: string,
+    page: number = 1,
+    limit: number = 10,
+  ): Promise<any> {
+    const searchTerm = item !== 'null' ? item : null;
+    const regex = searchTerm
+      ? new RegExp(`^${searchTerm}|${searchTerm}`, 'i')
+      : null;
 
     const catalogues = await this.catalogueModel
-      .find(query)
-      .skip(skip)
-      .limit(limit)
+      .find(searchTerm ? { 'items.name': { $regex: regex } } : {})
       .sort({ updatedAt: -1 })
       .exec();
 
-    const results = searchTerm
-      ? catalogues.flatMap((catalogue) =>
-          catalogue.items
-            .filter((item) => regex.test(item.name))
-            .map((item) => ({
-              catalogueID: catalogue._id,
-              name: item.name,
-              supplier: catalogue.supplier,
-              cost: item.cost,
-              date: catalogue.date,
-            })),
-        )
-      : catalogues.flatMap((catalogue) =>
-          catalogue.items.map((item) => ({
-            catalogueID: catalogue._id,
-            name: item.name,
-            supplier: catalogue.supplier,
-            cost: item.cost,
-            date: catalogue.date,
-          })),
-        );
+    let allItems = catalogues.flatMap((catalogue) =>
+      catalogue.items.map((item) => ({
+        catalogueID: catalogue._id,
+        name: item.name,
+        supplier: catalogue.supplier,
+        cost: item.cost,
+        date: catalogue.date,
+      })),
+    );
 
-    return results;
+    if (searchTerm) allItems = allItems.filter((item) => regex.test(item.name));
+    const paginatedItems = allItems.slice((page - 1) * limit, page * limit);
+    return paginatedItems;
   }
 }
