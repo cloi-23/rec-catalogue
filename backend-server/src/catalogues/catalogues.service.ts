@@ -80,6 +80,7 @@ export class CataloguesService {
           // itemID: item._id,
           name: item.name,
           supplier: catalogue.supplier,
+          cost: item.cost,
           date: catalogue.date,
         })),
     );
