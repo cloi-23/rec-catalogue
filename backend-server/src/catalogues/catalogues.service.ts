@@ -66,11 +66,10 @@ export class CataloguesService {
 
   async search(item: any, page: number = 1, limit: number = 10): Promise<any> {
     const skip = (page - 1) * limit;
-    const searchTerm =
-      typeof item === 'object' && item !== '' ? item.name : false;
-
+    const searchTerm = item !== 'null' ? item : false;
     const regex = new RegExp(`^${searchTerm}|${searchTerm}`, 'i');
     const query = searchTerm ? { 'items.name': { $regex: regex } } : {};
+    console.log('searchTerm', searchTerm, item !== 'null');
     console.log('query', query);
 
     const catalogues = await this.catalogueModel
