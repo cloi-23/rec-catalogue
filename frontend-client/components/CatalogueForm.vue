@@ -77,24 +77,21 @@ const openForm = () => {
         </button>
       </div>
       <div class="pt-5">
-        <div class="flex justify-end">
+        <p class="text-white text-xs italic">(PRESS * ESC TO CLOSE)</p>
+        <div class="flex justify-end ">
           <button
             @click="fields.items.push({ name: '', cost: 0 })"
             class=" text-white mb-5 mr-5 dark:bg-gray-700 border-2 bg-gray-400 dark:hover:bg-gray-800 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-blue-700"
           >
             +
           </button>
-          <form method="dialog">
+          <form method="dialog" class="flex gap-2 ">
+          
             <button
               @click="saveCatalogues"
               class="text-white mb-5 dark:bg-blue-700 border-2 bg-gray-400 dark:hover:bg-blue-800 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
             >
               Save
-            </button>
-            <button
-              class="text-white mb-5 dark:bg-blue-700 border-2 bg-gray-400 dark:hover:bg-blue-800 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
-            >
-              Cancel
             </button>
           </form>
         </div>
