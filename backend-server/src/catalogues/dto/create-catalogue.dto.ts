@@ -11,9 +11,6 @@ export class CreateCatalogueDto {
 
   @IsString()
   date: string;
-
-  @IsNumber()
-  amount: number;
 }
 
 class Item {
