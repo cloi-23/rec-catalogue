@@ -22,7 +22,8 @@ export class CataloguesController {
   }
 
   @Get()
-  findAll() {
+  findAll(@Query() item: any) {
+    if (item) return this.cataloguesService.search(item);
     return this.cataloguesService.findAll();
   }
 
@@ -47,9 +48,5 @@ export class CataloguesController {
   @Get('seed/data')
   seed() {
     return this.cataloguesService.seeder();
-  }
-  @Get('search/item')
-  search(@Query() item: any) {
-    return this.cataloguesService.search(item);
   }
 }
