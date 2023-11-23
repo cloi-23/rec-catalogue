@@ -83,16 +83,37 @@ export class CataloguesService {
       catalogue.items.map((item) => ({
         catalogueID: catalogue._id,
         itemID: item._id,
-        name: item.name,
-        supplier: catalogue.supplier,
-        cost: item.cost,
-        date: catalogue.date,
+        name: item.name.toUpperCase(),
+        supplier: catalogue.supplier.toUpperCase(),
+        cost: this.formatMoney(item.cost),
+        date: this.formatDate(catalogue.date.toISOString()),
       })),
     );
 
     if (searchTerm) allItems = allItems.filter((item) => regex.test(item.name));
     const paginatedItems = allItems.slice((page - 1) * limit, page * limit);
     return paginatedItems;
+  }
+
+  formatDate(dateString: string) {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'Asia/Manila',
+    };
+    return new Intl.DateTimeFormat('default', options).format(date);
+  }
+
+  formatMoney(moneyInPesos: number) {
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'PHP',
+    });
+    const formatted = formatter.format(moneyInPesos);
+    return formatted.replace('₱', '₱ ');
   }
 
   async removeItem(catalogueID: string, itemID: string): Promise<Catalogue> {

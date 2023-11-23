@@ -41,10 +41,10 @@ watch(controls, useDebounce(refresh, 700) as any, { immediate: true });
           class="grid grid-cols-4 gap-4 border-b dark:text-gray-300 hover:border-zinc-800 dark:border-zinc-800 dark:hover:border-zinc-50"
         >
           <div class="grid-cell">
-            {{ new Date(item.date).toISOString().split("T")[0] }}
+            {{ item.date }}
           </div>
           <div class="grid-cell">{{ item.name }}</div>
-          <div class="text-right grid-cell">P {{ item.cost.toFixed(2) }}</div>
+          <div class="text-right grid-cell">{{ item.cost}}</div>
           <div class="grid-cell">{{ item.supplier }}</div>
         </div>
       </main>
