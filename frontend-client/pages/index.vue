@@ -32,10 +32,10 @@ watch(controls, useDebounce(refresh, 700) as any, { immediate: true });
           <div class="grid-header">Supplier</div>
         </div>
         <div v-if="!catalogues.length" class="text-center dark:text-white">
-            No Records.
+          No Records.
         </div>
         <div
-        v-else
+          v-else
           v-for="(item, i) in (catalogues as any)"
           :key="i"
           class="grid grid-cols-4 gap-4 border-b dark:text-gray-300 hover:border-zinc-800 dark:border-zinc-800 dark:hover:border-zinc-50"
@@ -44,13 +44,13 @@ watch(controls, useDebounce(refresh, 700) as any, { immediate: true });
             {{ item.date }}
           </div>
           <div class="grid-cell">{{ item.name }}</div>
-          <div class="text-right grid-cell">{{ item.cost}}</div>
+          <div class="text-right grid-cell">{{ item.cost }}</div>
           <div class="grid-cell">{{ item.supplier }}</div>
         </div>
       </main>
       <footer class="mt-10 dark:bg-gray-800">
         <div class="text-sm flex justify-between">
-          <div class="lg:mx-11" />
+          <div class="lg:ml-44" />
           <div class="flex gap-2">
             <button
               class="px-4 text-white dark:bg-transparent hover:border bg-gray-400 rounded-lg"

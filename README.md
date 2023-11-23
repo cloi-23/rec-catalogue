@@ -1,1 +1,1 @@
-# rec-catalog
+# rec-catalogue
