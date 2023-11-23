@@ -67,7 +67,7 @@ export class CataloguesService {
   async search(item: any, page: number = 1, limit: number = 10): Promise<any> {
     const skip = (page - 1) * limit;
     const searchTerm =
-      typeof item === 'object' && item !== 'null' ? item.name : false;
+      typeof item === 'object' && item !== '' ? item.name : false;
 
     const regex = new RegExp(`^${searchTerm}|${searchTerm}`, 'i');
     const query = searchTerm ? { 'items.name': { $regex: regex } } : {};
