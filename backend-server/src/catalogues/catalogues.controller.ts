@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { CataloguesService } from './catalogues.service';
 import { CreateCatalogueDto } from './dto/create-catalogue.dto';
 import { UpdateCatalogueDto } from './dto/update-catalogue.dto';
@@ -23,7 +32,10 @@ export class CataloguesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCatalogueDto: UpdateCatalogueDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCatalogueDto: UpdateCatalogueDto,
+  ) {
     return this.cataloguesService.update(id, updateCatalogueDto);
   }
 
@@ -35,5 +47,9 @@ export class CataloguesController {
   @Get('seed/data')
   seed() {
     return this.cataloguesService.seeder();
+  }
+  @Get('search/item')
+  search(@Query() item: any) {
+    return this.cataloguesService.search(item);
   }
 }

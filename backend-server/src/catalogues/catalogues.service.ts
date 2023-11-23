@@ -31,8 +31,13 @@ export class CataloguesService {
     return catalogue;
   }
 
-  async update(id: string, updateCatalogueDto: UpdateCatalogueDto): Promise<Catalogue | null> {
-    const updatedCatalogue = await this.catalogueModel.findByIdAndUpdate(id, updateCatalogueDto, { new: true }).exec();
+  async update(
+    id: string,
+    updateCatalogueDto: UpdateCatalogueDto,
+  ): Promise<Catalogue | null> {
+    const updatedCatalogue = await this.catalogueModel
+      .findByIdAndUpdate(id, updateCatalogueDto, { new: true })
+      .exec();
     if (!updatedCatalogue) {
       throw new NotFoundException(`Catalogue with ID ${id} not found`);
     }
@@ -40,7 +45,9 @@ export class CataloguesService {
   }
 
   async remove(id: string): Promise<Catalogue | null> {
-    const deletedCatalogue = await this.catalogueModel.findByIdAndRemove(id).exec();
+    const deletedCatalogue = await this.catalogueModel
+      .findByIdAndRemove(id)
+      .exec();
     if (!deletedCatalogue) {
       throw new NotFoundException(`Catalogue with ID ${id} not found`);
     }
@@ -55,5 +62,28 @@ export class CataloguesService {
       console.error('Error seeding data :', error);
       throw new Error('Seeding failed');
     }
+  }
+
+  async search(item: any): Promise<any> {
+    const { name } = item;
+    const regex = new RegExp(`^${name}|${name}`, 'i');
+
+    const catalogues = await this.catalogueModel
+      .find({ 'items.name': { $regex: regex } })
+      .exec();
+
+    const result = catalogues.flatMap((catalogue) =>
+      catalogue.items
+        .filter((item) => regex.test(item.name))
+        .map((item) => ({
+          catalogueID: catalogue._id,
+          // itemID: item._id,
+          name: item.name,
+          supplier: catalogue.supplier,
+          date: catalogue.date,
+        })),
+    );
+
+    return result;
   }
 }

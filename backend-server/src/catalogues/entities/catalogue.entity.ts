@@ -1,10 +1,11 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
+import { Item } from './item.entity';
 import { Document } from 'mongoose';
 
 @Schema({ timestamps: true })
 export class Catalogue extends Document {
-  @Prop({ required: true })
-  items: ItemDetail[];
+  @Prop({ required: true, type: [Item] })
+  items: Item[];
 
   @Prop({ required: true })
   supplier: string;
@@ -13,11 +14,3 @@ export class Catalogue extends Document {
   date: Date;
 }
 export const CatalogueSchema = SchemaFactory.createForClass(Catalogue);
-
-class ItemDetail {
-  @Prop()
-  name: string;
-
-  @Prop()
-  cost: number;
-}
