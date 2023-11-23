@@ -76,7 +76,7 @@ export class CataloguesService {
       .find(query)
       .skip(skip)
       .limit(limit)
-      .sort({ updatedAt: 1 })
+      .sort({ updatedAt: -1 })
       .exec();
 
     const results = searchTerm
