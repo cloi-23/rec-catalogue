@@ -21,7 +21,7 @@ watch(controls, useDebounce(refresh, 700) as any, { immediate: true });
             v-model="controls.search"
             type="text"
             placeholder="Search Item"
-            class="h-12 p-4 border-2 border-gray-300 mt-1 w-1/2 rounded-md shadow-sm"
+            class="h-12p-4 border-2 border-gray-300 mt-1 w-1/2 rounded-md shadow-sm"
           />
           <CatalogueForm @refresh="refresh" />
         </div>
@@ -31,7 +31,11 @@ watch(controls, useDebounce(refresh, 700) as any, { immediate: true });
           <div class="grid-header">Cost</div>
           <div class="grid-header">Supplier</div>
         </div>
+        <div v-if="!catalogues.length" class="text-center dark:text-white">
+            No Records.
+        </div>
         <div
+        v-else
           v-for="(item, i) in (catalogues as any)"
           :key="i"
           class="grid grid-cols-4 gap-4 border-b dark:text-gray-300 hover:border-zinc-800 dark:border-zinc-800 dark:hover:border-zinc-50"
