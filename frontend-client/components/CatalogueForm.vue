@@ -1,21 +1,23 @@
 <script setup lang="ts">
 const fields = ref({ items: [{ name: "", cost: 0 }] });
-
+const formModal: any = ref(null);
 const saveCatalogues = () => {
   console.log(fields.value);
 };
-
-const addItems = () => fields.value.items.push({ name: "", cost: 0 });
+const createNew = () => {
+  fields.value.items = [{ name: "", cost: 0 }];
+  formModal.value.showModal();
+};
 </script>
 <template>
   <button
     class="block text-white dark:bg-blue-700 border-2 bg-gray-400 dark:hover:bg-blue-800 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-    onclick="my_modal_1.showModal()"
+    @click="createNew"
   >
     ADD +
   </button>
   <dialog
-    id="my_modal_1"
+    ref="formModal"
     class="modal dark:bg-gray-800 border border-gray-300 rounded-md"
   >
     <div class="px-10">
@@ -34,8 +36,9 @@ const addItems = () => fields.value.items.push({ name: "", cost: 0 });
           placeholder="Cost"
           class="p-4 border-2 border-gray-300 form-input mt-1 block rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
+        <div class="p-2" />
         <button
-          @click="addItems"
+          @click="fields.items.splice(i, 1)"
           class="text-white my-2 dark:bg-gray-700 border-2 bg-gray-400 dark:hover:bg-gray-800 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-blue-700"
         >
           -
@@ -44,7 +47,7 @@ const addItems = () => fields.value.items.push({ name: "", cost: 0 });
 
       <div class="flex justify-end pt-5">
         <button
-          @click="addItems"
+          @click="fields.items.push({ name: '', cost: 0 })"
           class="text-white mb-5 mr-5 dark:bg-gray-700 border-2 bg-gray-400 dark:hover:bg-gray-800 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-blue-700"
         >
           +
