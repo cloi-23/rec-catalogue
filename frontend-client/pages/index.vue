@@ -46,7 +46,7 @@
   font-weight: bold;
   padding: 10px;
   background: #f0f0f0;
-  border: 1px solid #drgb(209, 209, 209);
+  border: 1px solid rgb(209, 209, 209);
 }
 
 .grid-cell {
