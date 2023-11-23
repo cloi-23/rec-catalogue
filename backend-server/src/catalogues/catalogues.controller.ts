@@ -24,7 +24,7 @@ export class CataloguesController {
   @Get()
   findAll(@Query() query: any) {
     const { item, page, limit } = query;
-    if (item) return this.cataloguesService.search(item, page, limit);
+    if (query) return this.cataloguesService.search(item, page, limit);
   }
 
   @Get(':id')

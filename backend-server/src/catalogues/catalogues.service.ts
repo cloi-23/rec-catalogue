@@ -66,25 +66,41 @@ export class CataloguesService {
 
   async search(item: any, page: number = 1, limit: number = 10): Promise<any> {
     const skip = (page - 1) * limit;
-    const regex = new RegExp(`^${item}|${item}`, 'i');
+    const searchTerm =
+      typeof item === 'object' && item !== 'null' ? item.name : false;
+
+    const regex = new RegExp(`^${searchTerm}|${searchTerm}`, 'i');
+    const query = searchTerm ? { 'items.name': { $regex: regex } } : {};
+    console.log('query', query);
+
     const catalogues = await this.catalogueModel
-      .find({ 'items.name': { $regex: regex } })
+      .find(query)
       .skip(skip)
       .limit(limit)
       .sort({ updatedAt: 1 })
       .exec();
 
-    const results = catalogues.flatMap((catalogue) =>
-      catalogue.items
-        .filter((item) => regex.test(item.name))
-        .map((item) => ({
-          catalogueID: catalogue._id,
-          name: item.name,
-          supplier: catalogue.supplier,
-          cost: item.cost,
-          date: catalogue.date,
-        })),
-    );
+    const results = searchTerm
+      ? catalogues.flatMap((catalogue) =>
+          catalogue.items
+            .filter((item) => regex.test(item.name))
+            .map((item) => ({
+              catalogueID: catalogue._id,
+              name: item.name,
+              supplier: catalogue.supplier,
+              cost: item.cost,
+              date: catalogue.date,
+            })),
+        )
+      : catalogues.flatMap((catalogue) =>
+          catalogue.items.map((item) => ({
+            catalogueID: catalogue._id,
+            name: item.name,
+            supplier: catalogue.supplier,
+            cost: item.cost,
+            date: catalogue.date,
+          })),
+        );
 
     return results;
   }
