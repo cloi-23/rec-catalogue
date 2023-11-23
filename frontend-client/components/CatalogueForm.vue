@@ -11,7 +11,7 @@ const createNew = () => {
 </script>
 <template>
   <button
-    class="block text-white dark:bg-blue-700 border-2 bg-gray-400 dark:hover:bg-blue-800 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    class="text-white dark:bg-blue-700 border-2 bg-gray-400 dark:hover:bg-blue-800 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     @click="createNew"
   >
     ADD +
@@ -27,14 +27,14 @@ const createNew = () => {
           v-model="field.name"
           type="text"
           placeholder="Item Name"
-          class="p-4 border-2 border-gray-300 form-input mt-1 block rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          class="p-4 border-2 border-gray-300 mt-1 block rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
         <div class="p-2" />
         <input
           v-model="field.cost"
           type="number"
           placeholder="Cost"
-          class="p-4 border-2 border-gray-300 form-input mt-1 block rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          class="p-4 border-2 border-gray-300 mt-1 block rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
         <div class="p-2" />
         <button

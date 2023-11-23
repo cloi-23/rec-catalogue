@@ -10,7 +10,7 @@
           <input
             type="text"
             placeholder="Search Item"
-            class="p-4 border-2 border-gray-300 form-input mt-1 block w-1/2 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            class="p-4 border-2 border-gray-300 mt-1 w-1/2 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
           <CatalogueForm />
         </div>
@@ -35,6 +35,33 @@
           <div class="grid-cell">McDonalds</div>
         </div>
       </main>
+      <footer class="mt-10 dark:bg-gray-800">
+        <div class="text-sm flex justify-between">
+          <div class="lg:mx-11" />
+          <div class="flex gap-2">
+            <button
+              class="px-4 text-white dark:bg-transparent hover:border bg-gray-400 rounded-lg"
+            >
+              &#8592;
+            </button>
+            <button
+              class="px-4 text-white dark:bg-transparent hover:border bg-gray-400 rounded-lg"
+            >
+              &#8594;
+            </button>
+          </div>
+
+          <div class="dark:text-gray-800 text-right">
+            <input
+              type="number"
+              id="dataLimit"
+              class="px-2 py-1 border-2 border-gray-300 mt-1 w-1/2 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              placeholder="Limit"
+              min="1"
+            />
+          </div>
+        </div>
+      </footer>
     </div>
   </div>
 </template>
