@@ -1,10 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateCatalogueDto } from './dto/create-catalogue.dto';
 import { UpdateCatalogueDto } from './dto/update-catalogue.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Catalogue } from './entities/catalogue.entity';
 import { CatalogueSeeder } from './seeder/catalogue.seeder';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class CataloguesService {
@@ -12,6 +17,7 @@ export class CataloguesService {
     @InjectModel(Catalogue.name)
     private readonly catalogueModel: Model<Catalogue>,
     protected readonly catalogueSeeder: CatalogueSeeder,
+    protected readonly configService: ConfigService,
   ) {}
 
   async create(createCatalogueDto: CreateCatalogueDto): Promise<Catalogue> {
@@ -54,13 +60,18 @@ export class CataloguesService {
     return deletedCatalogue;
   }
 
-  async seeder(): Promise<any> {
+  async seeder(): Promise<{ message: string }> {
+    const env = this.configService.get<string>('NODE_ENV');
+
+    if (env !== 'development') {
+      throw new BadRequestException(`Can't seed on ${env} environment`);
+    }
+
     try {
       await this.catalogueSeeder.plant();
       return { message: 'Seeding completed successfully' };
     } catch (error) {
-      console.error('Error seeding data :', error);
-      throw new Error('Seeding failed');
+      throw new BadRequestException(`Seeding failed: ${error.message}`);
     }
   }
 

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {i}
 const fields = ref({
   date: new Date().toISOString().split("T")[0],
   supplier: "",

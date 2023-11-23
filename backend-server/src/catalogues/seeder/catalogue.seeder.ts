@@ -15,6 +15,7 @@ export class CatalogueSeeder {
       await this.Catalogue.deleteMany({});
       console.log('seeding catalogue..');
       await this.Catalogue.insertMany(cataloguesSeedData);
+      console.log('seeding catalogue done.');
     } catch (error) {
       console.error('Error seeding data:');
     }

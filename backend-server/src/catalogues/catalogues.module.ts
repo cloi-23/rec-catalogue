@@ -6,7 +6,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CatalogueSeeder } from './seeder/catalogue.seeder';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Catalogue.name, schema: CatalogueSchema }])],
+  imports: [
+    MongooseModule.forFeature([
+      { name: Catalogue.name, schema: CatalogueSchema },
+    ]),
+  ],
   controllers: [CataloguesController],
   providers: [CataloguesService, CatalogueSeeder],
 })
