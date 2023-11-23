@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {i}
 const fields = ref({
   date: new Date().toISOString().split("T")[0],
   supplier: "",
@@ -78,7 +77,7 @@ const openForm = () => {
         </button>
       </div>
       <div class="pt-5">
-        <p class="text-white text-xs italic">(PRESS * ESC TO CLOSE)</p>
+        <p class="text-white text-xs font-italic">(PRESS * ESC TO CLOSE)</p>
         <div class="flex justify-end ">
           <button
             @click="fields.items.push({ name: '', cost: 0 })"
