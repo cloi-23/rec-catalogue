@@ -4,6 +4,7 @@ const fields = ref({
   supplier: "",
   items: [{ name: "", cost: 0 }],
 });
+
 const formModal: any = ref(null);
 const saveCatalogues = async () => {
   await $fetch("http://localhost:3000/catalogues", {
@@ -11,8 +12,10 @@ const saveCatalogues = async () => {
     body: fields.value,
   });
 };
+
 const openForm = () => {
   fields.value.items = [{ name: "", cost: 0 }];
+  fields.value.supplier = "";
   formModal.value.showModal();
 };
 </script>

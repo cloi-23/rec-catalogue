@@ -6,7 +6,7 @@ const { data: catalogues, refresh } = await useAsyncData(() =>
   )
 );
 
-watch(controls, useDebounce(refresh, 700), { immediate: true });
+watch(controls, useDebounce(refresh, 700) as any, { immediate: true });
 </script>
 <template>
   <div>
