@@ -82,6 +82,7 @@ export class CataloguesService {
     let allItems = catalogues.flatMap((catalogue) =>
       catalogue.items.map((item) => ({
         catalogueID: catalogue._id,
+        itemID: item._id,
         name: item.name,
         supplier: catalogue.supplier,
         cost: item.cost,
@@ -92,5 +93,21 @@ export class CataloguesService {
     if (searchTerm) allItems = allItems.filter((item) => regex.test(item.name));
     const paginatedItems = allItems.slice((page - 1) * limit, page * limit);
     return paginatedItems;
+  }
+
+  async removeItem(catalogueID: string, itemID: string): Promise<Catalogue> {
+    const updatedCatalogue = await this.catalogueModel
+      .findByIdAndUpdate(
+        catalogueID,
+        { $pull: { items: { _id: itemID } } },
+        { new: true },
+      )
+      .exec();
+
+    if (!updatedCatalogue) {
+      throw new Error('Catalogue not found');
+    }
+
+    return updatedCatalogue;
   }
 }

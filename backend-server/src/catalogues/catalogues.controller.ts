@@ -45,6 +45,14 @@ export class CataloguesController {
     return this.cataloguesService.remove(id);
   }
 
+  @Delete(':catalogueID/item/:itemID')
+  removeItem(
+    @Param('catalogueID') catalogueID: string,
+    @Param('itemID') itemID: string,
+  ) {
+    return this.cataloguesService.removeItem(catalogueID, itemID);
+  }
+
   @Get('seed/data')
   seed() {
     return this.cataloguesService.seeder();
