@@ -1,7 +1,9 @@
 <script setup lang="ts">
 const controls = reactive({ page: 1, limit: 10, search: null });
 const { data: catalogues, refresh } = await useAsyncData(() =>
-  $fetch(`http://localhost:3000/catalogues?item=${controls.search}`)
+  $fetch(
+    `http://localhost:3000/catalogues?item=${controls.search}&page=${controls.page}&limit=${controls.limit}`
+  )
 );
 
 watch(controls, useDebounce(refresh, 700), { immediate: true });
