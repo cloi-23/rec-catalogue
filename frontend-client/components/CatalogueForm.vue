@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const fields = ref({
-  date: new Date(),
+  date: new Date().toISOString().split("T")[0],
   supplier: "",
   items: [{ name: "", cost: 0 }],
 });
@@ -35,7 +35,19 @@ const openForm = () => {
   >
     <div class="px-10">
       <h3 class="text-center">Add Items & Cost</h3>
-
+      <div class="flex gap-16">
+        <input
+          v-model="fields.supplier"
+          type="text"
+          placeholder="Supplier"
+          class="border-2 px-4 border-gray-300 mt-1 block rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        />
+        <input
+          v-model="fields.date"
+          type="date"
+          class="border-2 px-3 border-gray-300 mt-1 block rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        />
+      </div>
       <div v-for="(field, i) in fields.items" :key="i" class="flex py-2">
         <input
           v-model="field.name"
@@ -61,12 +73,6 @@ const openForm = () => {
         </button>
       </div>
       <div class="pt-5">
-        <input
-          v-model="fields.supplier"
-          type="text"
-          placeholder="Supplier"
-          class="border-2 px-4 border-gray-300 mt-1 block rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        />
         <div class="flex justify-end">
           <button
             @click="fields.items.push({ name: '', cost: 0 })"
