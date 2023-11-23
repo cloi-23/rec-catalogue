@@ -65,16 +65,14 @@ export class CataloguesService {
   }
 
   async search(item: any, page: number = 1, limit: number = 10): Promise<any> {
-    const searchTerm = item !== 'null' ? item : false;
+    const searchTerm = item !== 'null' ? item : null;
     const regex = searchTerm ? new RegExp(`^${searchTerm}`, 'i') : null;
 
-    // Fetch all catalogues matching the query (without pagination)
     const catalogues = await this.catalogueModel
       .find(searchTerm ? { 'items.name': { $regex: regex } } : {})
       .sort({ updatedAt: -1 })
       .exec();
 
-    // Consolidate and filter items from all catalogues
     let allItems = catalogues.flatMap((catalogue) =>
       catalogue.items.map((item) => ({
         catalogueID: catalogue._id,
@@ -85,13 +83,8 @@ export class CataloguesService {
       })),
     );
 
-    if (searchTerm) {
-      allItems = allItems.filter((item) => regex.test(item.name));
-    }
-
-    // Apply pagination to the consolidated list of items
+    if (searchTerm) allItems = allItems.filter((item) => regex.test(item.name));
     const paginatedItems = allItems.slice((page - 1) * limit, page * limit);
-
     return paginatedItems;
   }
 }
