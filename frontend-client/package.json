@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "content-wind": "latest",
-    "nuxt": "latest"
+    "nuxt": "latest",
+    "nuxt-lodash": "^2.5.3"
   }
 }
