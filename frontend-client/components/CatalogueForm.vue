@@ -63,7 +63,6 @@ const openForm = () => {
           class="p-4 border-2 border-gray-300 mt-1 block rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
         <div class="p-2" />
-        <div class="p-2" />
         <button
           @click="fields.items.splice(i, 1)"
           tabindex="-1"
