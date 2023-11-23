@@ -64,20 +64,21 @@ export class CataloguesService {
     }
   }
 
-  async search(item: any): Promise<any> {
-    const { name } = item;
-    const regex = new RegExp(`^${name}|${name}`, 'i');
-
+  async search(item: any, page: number = 1, limit: number = 10): Promise<any> {
+    const skip = (page - 1) * limit;
+    const regex = new RegExp(`^${item}|${item}`, 'i');
     const catalogues = await this.catalogueModel
       .find({ 'items.name': { $regex: regex } })
+      .skip(skip)
+      .limit(limit)
+      .sort({ updatedAt: 1 })
       .exec();
 
-    const result = catalogues.flatMap((catalogue) =>
+    const results = catalogues.flatMap((catalogue) =>
       catalogue.items
         .filter((item) => regex.test(item.name))
         .map((item) => ({
           catalogueID: catalogue._id,
-          // itemID: item._id,
           name: item.name,
           supplier: catalogue.supplier,
           cost: item.cost,
@@ -85,6 +86,6 @@ export class CataloguesService {
         })),
     );
 
-    return result;
+    return results;
   }
 }

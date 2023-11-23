@@ -22,9 +22,9 @@ export class CataloguesController {
   }
 
   @Get()
-  findAll(@Query() item: any) {
-    if (item) return this.cataloguesService.search(item);
-    return this.cataloguesService.findAll();
+  findAll(@Query() query: any) {
+    const { item, page, limit } = query;
+    if (item) return this.cataloguesService.search(item, page, limit);
   }
 
   @Get(':id')
