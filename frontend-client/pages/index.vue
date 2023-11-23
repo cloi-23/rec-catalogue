@@ -1,3 +1,6 @@
+<script setup lang="ts">
+const controls = ref({ page: 1, limit: 10, search: "" });
+</script>
 <template>
   <div>
     <div
@@ -8,6 +11,7 @@
       >
         <div class="flex w-full justify-between">
           <input
+            v-model="controls.search"
             type="text"
             placeholder="Search Item"
             class="p-4 border-2 border-gray-300 mt-1 w-1/2 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -41,11 +45,14 @@
           <div class="flex gap-2">
             <button
               class="px-4 text-white dark:bg-transparent hover:border bg-gray-400 rounded-lg"
+              @click="controls.page > 1 ? controls.page-- : null"
             >
               &#8592;
             </button>
+            <span class="mt-2">{{ controls.page }}</span>
             <button
               class="px-4 text-white dark:bg-transparent hover:border bg-gray-400 rounded-lg"
+              @click="controls.page++"
             >
               &#8594;
             </button>
@@ -54,8 +61,9 @@
           <div class="dark:text-gray-800 text-right">
             <input
               type="number"
+              v-model="controls.limit"
               id="dataLimit"
-              class="px-2 py-1 border-2 border-gray-300 mt-1 w-1/2 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              class="px-2 py-1 text-center border-2 border-gray-300 mt-1 w-1/2 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
               placeholder="Limit"
               min="1"
             />
@@ -65,9 +73,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts"></script>
-
 <style scoped>
 .grid-header {
   font-weight: bold;

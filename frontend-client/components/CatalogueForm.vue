@@ -44,7 +44,6 @@ const createNew = () => {
           -
         </button>
       </div>
-
       <div class="flex justify-end pt-5">
         <button
           @click="fields.items.push({ name: '', cost: 0 })"
