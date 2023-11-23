@@ -23,7 +23,7 @@ watch(controls, useDebounce(refresh, 700) as any, { immediate: true });
             placeholder="Search Item"
             class="p-4 border-2 border-gray-300 mt-1 w-1/2 rounded-md shadow-sm"
           />
-          <CatalogueForm />
+          <CatalogueForm @refresh="refresh" />
         </div>
         <div class="py-7 grid grid-cols-4 gap-4">
           <div class="grid-header">Date</div>

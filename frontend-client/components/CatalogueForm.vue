@@ -4,13 +4,14 @@ const fields = ref({
   supplier: "",
   items: [{ name: "", cost: 0 }],
 });
-
+const emit = defineEmits(["refresh"]);
 const formModal: any = ref(null);
 const saveCatalogues = async () => {
   await $fetch("http://localhost:3000/catalogues", {
     method: "POST",
     body: fields.value,
   });
+  emit("refresh");
 };
 
 const openForm = () => {
@@ -29,7 +30,7 @@ const openForm = () => {
   <dialog
     ref="formModal"
     @keyup.shift.enter.native="fields.items.push({ name: '', cost: 0 })"
-    @keyup.enter.native="saveCatalogues"
+    @keyup.alt.enter.native="saveCatalogues"
     class="modal dark:bg-gray-800 border border-gray-300 rounded-md"
   >
     <div class="px-10">
