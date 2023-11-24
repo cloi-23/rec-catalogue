@@ -6,7 +6,7 @@ const {
   refresh,
 } = await useAsyncData(() =>
   $fetch(
-    `http://localhost:4001/catalogues?item=${controls.search}&page=${controls.page}&limit=${controls.limit}`
+    `http://192.168.1.38:4001/catalogues?item=${controls.search}&page=${controls.page}&limit=${controls.limit}`
   )
 );
 
