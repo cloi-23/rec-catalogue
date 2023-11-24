@@ -1,6 +1,6 @@
 <template>
 
-  <ion-item v-if="catalogue" :routerLink="'/message/' + catalogue.id" :detail="false" class="list-item">
+  <ion-item v-if="catalogue" :detail="false" class="list-item">
     <div slot="start" class="dot dot-unread"></div>
     <ion-label class="ion-text-wrap">
       <h2>
@@ -25,10 +25,9 @@
 import { IonIcon, IonItem, IonLabel, IonNote } from '@ionic/vue';
 import { chevronForward } from 'ionicons/icons';
 
-const props = defineProps({
+defineProps({
   catalogue: Object,
 });
-console.log("catalogue",props.catalogue);
 
 const isIos = () => {
   const win = window as any;
