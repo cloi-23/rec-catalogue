@@ -21,8 +21,16 @@
     </ion-toolbar>
       </ion-header>
       <ion-list>
-        <CatalogueListItem v-for="catalogue in catalogues" :key="catalogue.catalogueID" :catalogue="catalogue" />
+        <ion-item v-if="catalogues?.length <=0 " class="list-item" :key="Date.now()">
+          <ion-label class="ion-text-wrap">
+            <h2 align="center">
+            No record.
+            </h2>
+          </ion-label>
+        </ion-item>
+        <CatalogueListItem v-else v-for="catalogue in catalogues" :key="catalogue.catalogueID" :catalogue="catalogue" />
       </ion-list>
+
       <ScrollRefresh @next-page="nextPage" />
     </ion-content>
 
@@ -40,7 +48,9 @@ import {
   IonRefresherContent,
   IonTitle,
   IonToolbar,
-  IonSearchbar
+  IonSearchbar,
+  IonLabel,
+  IonItem
 } from '@ionic/vue';
 import CatalogueListItem from '@/components/CatalogueListItem.vue';
 import ScrollRefresh from '@/components/common/ScrollRefresh.vue';
