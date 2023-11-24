@@ -36,7 +36,7 @@ watch(controls, useDebounce(refresh, 700) as any, { immediate: true });
           <div class="grid-header">Supplier</div>
         </div>
         <div
-          v-if="!pending && !catalogues?.length"
+          v-if="!pending && !catalogues.length"
           class="text-center dark:text-white"
         >
           No Records.
