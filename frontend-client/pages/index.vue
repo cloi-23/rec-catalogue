@@ -2,7 +2,7 @@
 const controls = reactive({ page: 1, limit: 10, search: null });
 const { data: catalogues, refresh } = await useAsyncData(() =>
   $fetch(
-    `http://localhost:3000/catalogues?item=${controls.search}&page=${controls.page}&limit=${controls.limit}`
+    `http://localhost:4001/catalogues?item=${controls.search}&page=${controls.page}&limit=${controls.limit}`
   )
 );
 

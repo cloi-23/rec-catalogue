@@ -7,7 +7,7 @@ const fields = ref({
 const emit = defineEmits(["refresh"]);
 const formModal: any = ref(null);
 const saveCatalogues = async () => {
-  await $fetch("http://localhost:3000/catalogues", {
+  await $fetch("http://localhost:4001/catalogues", {
     method: "POST",
     body: fields.value,
   });
