@@ -54,7 +54,7 @@ import {
 } from '@ionic/vue';
 import CatalogueListItem from '@/components/CatalogueListItem.vue';
 import ScrollRefresh from '@/components/common/ScrollRefresh.vue';
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import axios from 'axios';
 
 const catalogues = ref<any[]>([]);
@@ -81,6 +81,7 @@ const handleSearch = async(event:any)=>{
         const response = await axios.get(`${backendUrl}/catalogues?item=${controls.value.item}&page=${controls.value.page}&limit=${controls.value.limit}`);
         return response.data;
     } catch (error) {
+      alert('Error fetching catalogues:  '+ error.message )
         console.error('Error fetching catalogues:', error);
     }
 };
