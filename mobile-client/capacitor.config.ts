@@ -5,8 +5,14 @@ const config: CapacitorConfig = {
   appName: 'mobile-client',
   webDir: 'dist',
   server: {
-    androidScheme: 'https'
-  }
+    // "url": 'http://58.69.177.74:4001',
+    "cleartext": true
+  },
+  plugins: {
+    CapacitorHttp: {
+      enabled: true,
+    },
+  },
 };
 
 export default config;

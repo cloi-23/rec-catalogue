@@ -55,7 +55,8 @@ import {
 import CatalogueListItem from '@/components/CatalogueListItem.vue';
 import ScrollRefresh from '@/components/common/ScrollRefresh.vue';
 import { onMounted, ref } from 'vue';
-import axios from 'axios';
+import { CapacitorHttp, HttpResponse } from '@capacitor/core';
+
 
 const catalogues = ref<any[]>([]);
 const controls = ref({
@@ -78,7 +79,11 @@ const handleSearch = async(event:any)=>{
  const getCatalogues = async () => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     try {
-        const response = await axios.get(`${backendUrl}/catalogues?item=${controls.value.item}&page=${controls.value.page}&limit=${controls.value.limit}`);
+      const options = {
+    url: `${backendUrl}/catalogues?item=${controls.value.item}&page=${controls.value.page}&limit=${controls.value.limit}`,
+    headers: { 'Content-Type': "application/json" },
+  };
+      const response: HttpResponse = await CapacitorHttp.get(options);
         return response.data;
     } catch (error) {
       alert('Error fetching catalogues:  '+ error.message )
@@ -98,6 +103,7 @@ const refresh = (ev: CustomEvent) => {
   setTimeout(() => {
     controls.value.page=1
     controls.value.item=null
+    catalogues.value = []
     fetchCatalogues()
     ev.detail.complete();
   }, 3000);
