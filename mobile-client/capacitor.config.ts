@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: "mobile-client",
   webDir: "dist",
   server: {
-    androidScheme: "http",
+    cleartext: true,
   },
 };
 
