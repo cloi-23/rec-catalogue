@@ -33,6 +33,7 @@ cd android
 
 # Build the Android app using Gradle
 if [ "$BUILD_TYPE" = "debug" ]; then
+    ./gradlew clean
     ./gradlew assembleDebug
 else
     # Verifying the APK
